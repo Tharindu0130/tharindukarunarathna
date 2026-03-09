@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../Layout/Section';
 import { personalInfo, socialLinks } from '../../data/portfolioData';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -21,22 +22,34 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const formRef = useRef();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Here you would typically send the form data to a backend service
-    // For now, we'll just show a success message
-    setFormStatus('success');
-    setTimeout(() => {
-      setFormStatus('');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
-
-    console.log('Form submitted:', formData);
+    try {
+      // Send email using EmailJS
+      await emailjs.sendForm(
+        'service_eqeixrs',     // You'll get this from EmailJS
+        'template_odj4r6p',     // You'll get this from EmailJS
+        formRef.current,
+        '4R14-jwJLxbP9eKEz'       // You'll get this from EmailJS
+      );
+      
+      setFormStatus('success');
+      setTimeout(() => {
+        setFormStatus('');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      setFormStatus('error');
+    }
   };
 
   return (
     <motion.form
+      ref={formRef}
       onSubmit={handleSubmit}
       initial={{ opacity: 0, x: 30 }}
       whileInView={{ opacity: 1, x: 0 }}

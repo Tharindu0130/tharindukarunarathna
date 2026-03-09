@@ -59,7 +59,7 @@ export const projects = [
     title: 'Personal Portfolio Website',
     description: 'Modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion featuring smooth animations and dark theme.',
     technologies: ['React', 'Tailwind CSS', 'Framer Motion'],
-    github: 'https://github.com/Tharindu0130',
+    github: 'https://github.com/Tharindu0130/tharindukarunarathna.git',
     featured: false,
   },
 ];
