@@ -1,0 +1,4 @@
+export const socialLinks = {
+  github: 'https://github.com/Tharindu0130',
+  linkedin: 'https://www.linkedin.com/in/tharindu-karunarathna-904227329/',
+};
